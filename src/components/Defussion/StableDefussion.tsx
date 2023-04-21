@@ -26,7 +26,7 @@ export default function StableDiffusion() {
                 "key": process.env.NEXT_PUBLIC_DIFFUSION_KEY,
                 "prompt": body,
                 "negative_prompt": null,
-                "init_image": "https://raw.githubusercontent.com/CompVis/stable-diffusion/main/data/inpainting_examples/overture-creations-5sI6fQgYIuo.png",
+                "init_image": "https://cdn.pixabay.com/photo/2023/02/14/13/13/ai-generated-7789536_1280.jpg",
                 "width": "512",
                 "height": "512",
                 "samples": "3",
