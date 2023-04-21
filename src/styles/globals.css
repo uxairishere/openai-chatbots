@@ -3,5 +3,14 @@
 @tailwind utilities;
 
 body{
-    background-color: #1b1b1b;
+background-color: #141414;
+}
+
+.background-main{
+    
+    background-image: url('../assets/images/bg.jpg');
+    background-size:    contain;
+    background-repeat: no-repeat;
+    background-position: top;
+    z-index: -1;
 }

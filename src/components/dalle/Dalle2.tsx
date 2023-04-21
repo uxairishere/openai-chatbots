@@ -4,6 +4,8 @@ import dallelogo from '../../assets/logos/dallelogo.png'
 import Alert from '../Alerts/Alert';
 import Skeleton from '../Alerts/Skeleton';
 
+import { createProxyMiddleware } from 'http-proxy-middleware';
+
 export default function Dalle2() {
     const [response, setResponse] = useState<any[]>([]);
     const [body, setBody] = useState<string>('');
@@ -13,6 +15,7 @@ export default function Dalle2() {
     const HandleOnKeyPress = async (e: any) => {
         if (e.key === 'Enter') {
             setLoadiing(true)
+            setFailed(false)
             setResponse([])
             const options = {
                 method: 'POST',
@@ -33,17 +36,18 @@ export default function Dalle2() {
                 setFailed(true)
                 console.error(error);
             });
+
         }
     }
     return (
         <div>
             <div className='text-white py-10 text-center flex justify-center items-end space-x-3'>
-                <img src={dallelogo.src} width={80} height={80} alt="" />
-                <h1 className='text-5xl'>Create with DALL-E</h1>
+                <img src={dallelogo.src} className='w-12 h-12 md:w-20 md:h-20' alt="" />
+                <h1 className='text-2xl md:text-5xl font-bold'>Create with DALL-E</h1>
             </div>
-            <div className='w-[50%] mx-auto flex justify-center items-center space-x-3'>
+            <div className='w-[90%] md:w-[50%] mx-auto md:flex md:justify-center md:items-center md:space-x-3 space-y-3 md:space-y-0'>
                 {response && response.map((val, index) => (
-                    <img className='w-[50%]' key={index} src={val.url} alt="loading..." />
+                    <img className='w-full md:w-[50%]' key={index} src={val} alt="loading..." />
                 ))
                 }
                 {loading &&
@@ -52,9 +56,12 @@ export default function Dalle2() {
                         <Skeleton />
                     </>
                 }
+                {failed &&
+                    <Alert />
+                }
             </div>
             <div className='absolute bottom-20 w-full'>
-                <div className='w-[50%] mx-auto'>
+                <div className='w-[90%] md:w-[50%] mx-auto'>
                     <div className='relative'>
                         {loading &&
                             <div role="status" className='absolute right-3 top-1'>
